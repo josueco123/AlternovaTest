@@ -5,7 +5,7 @@ Esta es la aplicacion solicitada para la prueba de conocimientos de alternova, s
 *******************
 Tecnologías
 *******************
-- react-native 0.70.6
+- React Native 0.70.6
 
 ## Instalación
 - Instalar node.js y JDK11
