@@ -9,8 +9,7 @@ export default function Login() {
 //google sign in
 const startGoogleSession = async () => {
     try {
-        const userInfo = await GoogleSignin.signIn();
-        console.log(JSON.stringify(userInfo));
+        await GoogleSignin.signIn();
 
         navigation.navigate('ListProducts');
         

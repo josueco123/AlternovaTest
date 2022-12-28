@@ -3,6 +3,7 @@ import { Card, Text, Button, Layout, TopNavigation, Icon, Divider } from '@ui-ki
 import { StyleSheet, Image, View } from 'react-native';
 import { Dropdown } from '../../Components/Dropdown';
 import { detailProducts } from '../../Api/FakeApi';
+import { getProduct } from '../../Api/Products';
 
 export const DetailProduct = ({ route, navigation }) => {
 
@@ -12,7 +13,9 @@ export const DetailProduct = ({ route, navigation }) => {
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    setProduct(detailProducts[productId - 1]);
+    getProduct(productId).then((response) =>{
+      setProduct(response);
+    });
   }, []);
 
   const plusIcon = (props) => (
@@ -35,7 +38,7 @@ export const DetailProduct = ({ route, navigation }) => {
       <Button
         style={styles.footerControl}
         size='small'>
-        Agregar
+        Comprar
       </Button>
     </View>
   );

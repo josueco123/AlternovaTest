@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { StyleSheet,  Image } from "react-native";
 import { Layout, Text, Toggle   } from '@ui-kitten/components';
 import { ThemeContext } from "../../../theme-context";
@@ -8,7 +8,7 @@ import Login from "../../Auth/Login";
 
 export default function LoginScreen ({ navigation }) {
  
-    const checked = false;
+    const [checked, setCheked] = useState(false);
     const themeContext = useContext(ThemeContext);
 
     useEffect(() => {
@@ -21,17 +21,22 @@ export default function LoginScreen ({ navigation }) {
       })
     }, []);
 
+    const onChangeCheckbox = () =>{
+      setCheked(!checked);
+      themeContext.toggleTheme();
+    }
+
     return (
         <Layout style={styles.container}>
-            <Text category='h1' style={styles.title}>Alternova Test</Text> 
+            <Text category='h1' style={styles.title}>Alternova Store</Text> 
             <Image style={styles.image} source={{ uri: 'https://reactnative.dev/img/tiny_logo.png'}} /> 
             <Login />
             <Toggle 
                 checked={checked}
-                onChange={() =>{themeContext.toggleTheme();}}
+                onChange={onChangeCheckbox}
                 style={styles.check}
                 status='primary'>
-                Cambiar el tema
+                Cambiar a tema oscuro
                 </Toggle >
         </Layout> 
     );

@@ -1,7 +1,9 @@
 
+const baseUrl = 'https://489a19f7-f7d2-426a-8361-230148034a79.mock.pstmn.io/';
+
 const getAllProducts = async () =>{
 
-    const response = await fetch('https://525aa86b-e6ee-4e67-bbdf-f4d543d5701a.mock.pstmn.io/all-products');
+    const response = await fetch(baseUrl+'all-products');
     const data = await response.json();
     return data;
 
@@ -9,17 +11,16 @@ const getAllProducts = async () =>{
 
 const getProduct = async (id) =>{
 
-    const response = await fetch('https://525aa86b-e6ee-4e67-bbdf-f4d543d5701a.mock.pstmn.io/detail/' + id);
+    const response = await fetch(baseUrl+'detail/' + id);
     const data = await response.json();
     return data;
 
 };
 
-const buyProduct = async (data) =>{
+const buyProduct = async () =>{
 
-    const response = await fetch('https://525aa86b-e6ee-4e67-bbdf-f4d543d5701a.mock.pstmn.io/buy',{
-        method: 'POST', // or 'PUT'
-        body: JSON.stringify(data), // data can be `string` or {object}!
+    const response = await fetch(baseUrl+'buy',{
+        method: 'POST', 
         headers:{
             'Content-Type': 'application/json'
         }

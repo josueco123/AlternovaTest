@@ -4,6 +4,7 @@ import { Text, List, Card, Layout, TopNavigation, Button, Icon, Modal } from '@u
 import { useFocusEffect } from '@react-navigation/native';
 import { Dropdown } from '../../Components/Dropdown';
 import { products } from '../../Api/FakeApi';
+import { getAllProducts, buyProduct } from '../../Api/Products';
 
 export const ListProducts = ({ navigation }) => {
 
@@ -30,7 +31,10 @@ export const ListProducts = ({ navigation }) => {
   );
 
   useEffect(() => {
-    setProductsData(products.products);
+    getAllProducts().then((resp) =>{
+      setProductsData(resp.products);
+    })
+    
   }, []);
 
   useFocusEffect(
@@ -48,6 +52,14 @@ export const ListProducts = ({ navigation }) => {
     setCantidad(1);
     if (showAlert) setShowAlert(false);
     setVisibleModal(false);
+  }
+
+  const onBuyProduct = async () =>{
+    setCantidad(1);
+    buyProduct().then((resp) =>{
+      setVisibleModal(false);
+      setProductsData(resp.products);
+    })
   }
 
   const handlerAddToCart = () => {
@@ -82,10 +94,11 @@ export const ListProducts = ({ navigation }) => {
       </Button>
       <Button
         style={styles.footerControl}
+        disabled={product.stock === 0 ? true : false}
         size='small'
         status='primary'
-        onPress={onCancelCart}>
-        Agregar
+        onPress={onBuyProduct}>
+        Comprar
       </Button>
     </View>
   );
